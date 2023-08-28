@@ -1,0 +1,23 @@
+{
+  "name": "my-mern-app",
+  "version": "1.0.0",
+  "description": "A MERN stack application",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "client": "cd frontend && npm run dev",
+    "server": "cd backend && nodemon server.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "generate:env": "node generateEnv.js"
+  },
+  "author": "Luke Norris",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongodb": "^4.0.0",
+    "nodemon": "^3.0.1"
+  },
+  "devDependencies": {
+    "concurrently": "^7.0.0"
+  }
+}

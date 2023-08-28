@@ -4,6 +4,7 @@ import { Button, DisplayTile } from "../components";
 import style from "./GameHistoryDetails.module.css";
 import { useEffect, useState } from "react";
 import { get } from "../utils/http";
+import { DB_URL } from "../constants/db_url";
 
 export default function GameHistoryDetails() {
   const { boardId = "" } = useParams();
@@ -12,7 +13,7 @@ export default function GameHistoryDetails() {
 
   const fetchGameDetails = async (id: string) => {
     const fetchedGame = await get<gameState>(
-      `http://localhost:5000/api/games/${id}`
+      `${DB_URL}/api/games/${id}`
     );
     setGameDetails(fetchedGame);
   };

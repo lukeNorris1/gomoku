@@ -3,6 +3,7 @@ import { useEffect, useState, useCallback } from "react";
 import { gameState } from "../types";
 import { get } from "../utils/http";
 import style from "./GameHistory.module.css";
+import { DB_URL } from "../constants/db_url";
 
 export default function GameHistory() {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ export default function GameHistory() {
   const fetchGameDetails = useCallback(async () => {
     try {
       const fetchedGames = await get<gameState[]>(
-        "http://localhost:5000/api/games/all"
+        `${DB_URL}/api/games/all`
       );
       setGames(fetchedGames);
     } catch (error) {

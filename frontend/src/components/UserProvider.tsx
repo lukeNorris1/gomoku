@@ -1,13 +1,12 @@
 import { User, Credential } from "../types";
 import { UserContext } from "../context";
 import { useLocalStorage } from "../hooks";
-import { DB_URL } from "../constants/db_url"
+import { DB_URL } from "../constants/db_url";
 import { post, setToken } from "../utils/http";
 
 type UserProviderProps = {
   children: React.ReactNode;
 };
-
 
 export default function UserProvider({ children }: UserProviderProps) {
   const [user, setUser] = useLocalStorage<User | undefined>("user", undefined);
@@ -17,13 +16,10 @@ export default function UserProvider({ children }: UserProviderProps) {
 
   const login = async (username: string, password: string) => {
     try {
-      const user = await post<Credential, User>(
-        `${DB_URL}/auth/login`,
-        {
-          username,
-          password,
-        }
-      );
+      const user = await post<Credential, User>(`${DB_URL}/api/auth/signin`, {
+        username,
+        password,
+      });
       setUser(user);
       return true;
     } catch (error) {
@@ -36,13 +32,10 @@ export default function UserProvider({ children }: UserProviderProps) {
 
   const register = async (username: string, password: string) => {
     try {
-      const user = await post<Credential, User>(
-        `${DB_URL}/auth/register`,
-        {
-          username,
-          password,
-        }
-      );
+      const user = await post<Credential, User>(`${DB_URL}/api/auth/signup`, {
+        username,
+        password,
+      });
       setUser(user);
       return true;
     } catch (error) {

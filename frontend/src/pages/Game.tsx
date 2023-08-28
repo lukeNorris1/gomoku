@@ -3,6 +3,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { BoardContext, UserContext } from "../context";
 import { Tile } from "../components";
 import { BoardActionType, TILE_STATUS } from "../constants";
+import { DB_URL } from "../constants/db_url"
 import { boardInfo, gameState } from "../types";
 import { post } from "../utils/http";
 import style from "./Game.module.css";
@@ -55,7 +56,7 @@ export default function Game() {
 
   const handleConfirmClick = async () => {
     const validatedGame: gameState = await post(
-      `http://localhost:5000/api/games/check`,
+      `${DB_URL}/api/games/check`,
       {
         state,
       }
@@ -109,7 +110,7 @@ export default function Game() {
         moves: state.moves,
       },
     };
-    await post(`http://localhost:5000/api/games/create`, {
+    await post(`${DB_URL}/api/games/create`, {
       finishedGame,
     });
   }

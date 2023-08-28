@@ -15,5 +15,3 @@ export enum BoardActionType {
   EMPTY = "EMPTY",
   ID = "ID",
 }
-
-export const API_HOST = import.meta.env.PORT

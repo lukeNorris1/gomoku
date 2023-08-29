@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import gameSchema from '../schemas/games.js'
 import dotenv from 'dotenv'
-import { indexOfTile, checkWinBlock, gameFinishCheck } from "../utils/gameFunctions.js";
+import { gameFinishCheck } from "../utils/gameFunctions.js";
 
 dotenv.config()
 

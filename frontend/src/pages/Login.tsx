@@ -22,6 +22,16 @@ export default function Login() {
     }
   };
 
+  async function handleGuestLogin(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    e.preventDefault();
+    const result = await login("guest", "guest");
+    if (result === true || result === "{}") {
+      navigate("/");
+    } else {
+      setErrorMessage(result);
+    }
+  }
+
   useEffect(() => {
     if (usernameInput.current) {
       usernameInput.current.focus();
@@ -59,6 +69,10 @@ export default function Login() {
       />
       <Button type="submit" disabled={!username || !password}>
         Login
+      </Button>
+
+      <Button type="submit" onClick={handleGuestLogin}>
+        Login as Guest
       </Button>
     </form>
   );

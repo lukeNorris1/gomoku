@@ -1,24 +1,25 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import corsOptions from './config/corsOptions.js'
 import mongoose from 'mongoose'
+import corsOptions from './config/corsOptions.js'
 import userRoutes from './new/routes/users.js'
 import gameRoutes from './new/routes/games.js'
 
 
 
 const app = express();
-
 dotenv.config();
 
-
-app.use(cors());
+// Enable CORS
+app.use(cors(corsOptions))
+// app.use(cors())
 app.use(express.json());
 
-// Default
-app.get("/api", (req, res) => {
-  res.status(201).json({ message: "Welcome to Gomoku App" });
+
+
+app.get("/", (req, res) => {
+  res.status(201).json({ message: "Backend Root Dir" });
 });
 
 //Routes
@@ -27,10 +28,8 @@ app.use("/api/auth", userRoutes);
 
 
 
-//Connect to server
 const DB_URL = process.env.SERVER_URL
 const PORT = process.env.SERVER_PORT || 5000
-
  
 mongoose.connect(DB_URL, { useNewUrlParser: true, useUnifiedTopology: true})
   .then(() => app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)))
@@ -42,3 +41,4 @@ db.once("open", function () {
   console.log("Connected successfully");
 })
  
+

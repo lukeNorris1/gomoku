@@ -12,9 +12,7 @@ export default function GameHistory() {
 
   const fetchGameDetails = useCallback(async () => {
     try {
-      const fetchedGames = await get<gameState[]>(
-        `${DB_URL}/api/games/all`
-      );
+      const fetchedGames = await get<gameState[]>(`${DB_URL}/api/games/all`);
       setGames(fetchedGames);
     } catch (error) {
       console.log(error);
